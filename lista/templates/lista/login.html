@@ -1,0 +1,29 @@
+{% extends 'lista/main.html' %}
+
+{% block content %}
+<div class="header-bar">
+    <h1>SUPLIS</h1>
+    <h2>Tu lista de compras</h2>
+    
+</div>
+<div class="card-body">
+    <form action="" method="post">
+        {% csrf_token %}
+        
+        <label>{{ form.label }}Nombre de Usuario</label>
+        {{ form.username }}
+
+        <label>{{ form.label }}Password</label>
+        {{ form.password }}
+        <br><br>
+    
+    
+
+    
+        <input class="button" type="submit" value="Ingresar">
+    <small><p>¿No tienes una cuenta? <a href="{% url 'registro'%}">Registrate aquí</a></p></small>
+
+</form>
+
+{% endblock content %}
+

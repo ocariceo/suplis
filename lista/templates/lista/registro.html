@@ -1,0 +1,26 @@
+{% extends 'lista/main.html' %}
+
+{% block content %}
+
+<div class="header-bar">
+    <h1>Registro</h1>
+</div>
+<div class="card-body">
+    <form action="" method="post">
+        {% csrf_token %}
+        <label>{{ form.label }}Nombre de Usuario</label>
+        {{ form.username }}
+    
+        <label>{{ form.label }}Password</label>
+        {{ form.password1 }}
+    
+        <label>{{ form.label }}Confirma tu Password</label>
+        {{ form.password2 }}
+        <br><br>
+        
+        <input class="button" type="submit" value="Registro">
+        <small><p>¿Tienes una cuenta? <a href="{% url 'login'%}">Ingresa aquí</a></p></small>
+    </form>
+</div>
+{% endblock content %}
+

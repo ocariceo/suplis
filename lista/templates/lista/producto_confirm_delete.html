@@ -1,0 +1,18 @@
+{% extends 'lista/main.html' %}
+
+{% block content %}
+<div class="header-bar">
+    <a href="{% url 'producto' %}">&#8592; Volver</a>
+
+</div>
+<div class="card-body">
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <p>¿Seguro quieres borrar este producto - {{ producto }}</p>
+        <input class="button" type="submit" value="Si, borrar">
+    </form>
+</div>
+
+
+{% endblock content %}

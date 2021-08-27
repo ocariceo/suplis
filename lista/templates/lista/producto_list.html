@@ -1,0 +1,80 @@
+{% extends 'lista/main.html' %}
+
+{% block content %}
+
+<div class="header-bar">
+    <div>
+        <h1>Hola {{request.user.get_short_name|title}}</h1>
+        <h3> Tienes <i>{{ count }}</i> producto{{ count|pluralize:'s'}} en tu lista </h3>
+
+    </div>
+    {% if request.user.is_authenticated %}
+    
+    <a href="{% url 'logout' %}">Logout</a>
+</div>
+
+
+
+{% else %}
+    <a href="{% url 'login' %}">Login</a>
+{% endif %}
+
+
+<h1></h1>
+
+<div id="search-add-wrapper">
+    <form action="" method="get">
+        <input type="text" name="search-area">
+        <input class="button" type="submit" value="Buscar en tu lista">
+    </form>
+    <a id="add-link" href="{% url 'crear-producto' %}">&#x2b;</a>
+</div>
+<div class="card-body">
+
+<div class="producto-items-wrapper">
+    {% for productos in producto %}
+    <div class="producto-wrapper">
+        {% if productos.comprado %}
+        <div class="producto-title">
+            <div class="producto-comprado-icon"></div>
+            <i><s><a href="{% url 'actualizar-producto' productos.id%}">{{ productos }}</a></s></i>
+        </div>
+        <a class="delete-link" href="{% url 'borrar-producto' productos.id%}">&#215;</a>
+        
+        {% else %}
+        <div class="producto-title">
+            <div class="producto-nocomprado-icon"></div>
+                <a href="{% url 'actualizar-producto' productos.id%}">{{ productos }}</a>
+            </div>
+            <a class="delete-link" href="{% url 'borrar-producto' productos.id%}">&#215;</a>
+        {% endif %}
+            
+    </div>
+    {% empty %}
+    <h3>No hay productos en la lista de compras</h3>
+    <a href="{% url 'crear-producto' %}">Agrega un nuevo producto a tu lista</a>
+    {% endfor %}
+</div>
+</div>
+<!-- <table>
+
+    <tr>
+        <th>Productos</th>
+    </tr>
+    {% for productos in producto %}
+    <tr>
+        <td>{{productos.producto}}</td>
+        <td><a href="{% url 'detalle-producto' productos.id %}">Ver</a></td>
+        <td><a href="{% url 'crear-producto' %}">Agregar</a></td>
+        <td><a href="{% url 'actualizar-producto' productos.id %}">Actualizar</a></td>
+        <td><a href="{% url 'borrar-producto' productos.id %}">Borrar</a></td>
+        
+    
+    </tr>
+    {% empty %}
+    <h3>No hay productos en la lista de compras</h3>
+    <a href="{% url 'crear-producto' %}">Agregar un Nuevo Producto a tu lista</a>
+    {% endfor %}
+</table> -->
+
+{% endblock content%}
